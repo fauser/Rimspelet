@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DatabaseModel.Store" Alias="Self" Provider="System.Data.SqlServerCe.3.5" ProviderManifestToken="3.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="DatabaseModelStoreContainer">
+          <EntitySet Name="Rime" EntityType="DatabaseModel.Store.Rime" store:Type="Tables" />
+          <EntitySet Name="Word" EntityType="DatabaseModel.Store.Word" store:Type="Tables" />
+          <AssociationSet Name="RimeWordRelation" Association="DatabaseModel.Store.RimeWordRelation">
+            <End Role="Rime" EntitySet="Rime" />
+            <End Role="Word" EntitySet="Word" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Rime">
+          <Key>
+            <PropertyRef Name="RimeID" />
+          </Key>
+          <Property Name="RimeID" Type="bigint" Nullable="false" />
+          <Property Name="RimeWord" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Word">
+          <Key>
+            <PropertyRef Name="WordID" />
+          </Key>
+          <Property Name="WordID" Type="bigint" Nullable="false" />
+          <Property Name="WordString" Type="nvarchar" MaxLength="100" />
+          <Property Name="Picture" Type="image" />
+          <Property Name="RimeID" Type="bigint" />
+        </EntityType>
+        <Association Name="RimeWordRelation">
+          <End Role="Rime" Type="DatabaseModel.Store.Rime" Multiplicity="0..1" />
+          <End Role="Word" Type="DatabaseModel.Store.Word" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rime">
+              <PropertyRef Name="RimeID" />
+            </Principal>
+            <Dependent Role="Word">
+              <PropertyRef Name="RimeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DatabaseModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="DatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Rime" EntityType="DatabaseModel.Rime" />
+          <EntitySet Name="Word" EntityType="DatabaseModel.Word" />
+          <AssociationSet Name="RimeWordRelation" Association="DatabaseModel.RimeWordRelation">
+            <End Role="Rime" EntitySet="Rime" />
+            <End Role="Word" EntitySet="Word" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Rime">
+          <Key>
+            <PropertyRef Name="RimeID" />
+          </Key>
+          <Property Type="Int64" Name="RimeID" Nullable="false" />
+          <Property Type="String" Name="RimeWord" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Word" Relationship="DatabaseModel.RimeWordRelation" FromRole="Rime" ToRole="Word" />
+        </EntityType>
+        <EntityType Name="Word">
+          <Key>
+            <PropertyRef Name="WordID" />
+          </Key>
+          <Property Type="Int64" Name="WordID" Nullable="false" />
+          <Property Type="String" Name="WordString" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Binary" Name="Picture" MaxLength="Max" FixedLength="false" />
+          <Property Type="Int64" Name="RimeID" />
+          <NavigationProperty Name="Rime" Relationship="DatabaseModel.RimeWordRelation" FromRole="Word" ToRole="Rime" />
+        </EntityType>
+        <Association Name="RimeWordRelation">
+          <End Type="DatabaseModel.Rime" Role="Rime" Multiplicity="0..1" />
+          <End Type="DatabaseModel.Word" Role="Word" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rime">
+              <PropertyRef Name="RimeID" />
+            </Principal>
+            <Dependent Role="Word">
+              <PropertyRef Name="RimeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DatabaseModelStoreContainer" CdmEntityContainer="DatabaseEntities">
+          <EntitySetMapping Name="Rime">
+            <EntityTypeMapping TypeName="DatabaseModel.Rime">
+              <MappingFragment StoreEntitySet="Rime">
+                <ScalarProperty Name="RimeWord" ColumnName="RimeWord" />
+                <ScalarProperty Name="RimeID" ColumnName="RimeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Word">
+            <EntityTypeMapping TypeName="DatabaseModel.Word">
+              <MappingFragment StoreEntitySet="Word">
+                <ScalarProperty Name="RimeID" ColumnName="RimeID" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="WordString" ColumnName="WordString" />
+                <ScalarProperty Name="WordID" ColumnName="WordID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="DatabaseModel">
+        <EntityTypeShape EntityType="DatabaseModel.Rime" Width="1.5" PointX="0.75" PointY="1.125" Height="1.5956835937499994" />
+        <EntityTypeShape EntityType="DatabaseModel.Word" Width="1.5" PointX="3" PointY="0.875" Height="1.9802864583333317" />
+        <AssociationConnector Association="DatabaseModel.RimeWordRelation" >
+          <ConnectorPoint PointX="2.25" PointY="1.9228417968749998" />
+          <ConnectorPoint PointX="3" PointY="1.9228417968749998" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

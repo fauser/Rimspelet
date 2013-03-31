@@ -1,0 +1,32 @@
+﻿<Window x:Class="RimSpelet.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Rim Spelet" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Height="428" Width="488">
+	<Grid>
+		<TabControl HorizontalAlignment="Stretch" Margin="0,0,0,0" Name="tabControl1" VerticalAlignment="Stretch">
+			<TabItem Header="Spelet" Name="tabItem1">
+				<Grid>
+					<Canvas Height="312" HorizontalAlignment="Left" Margin="6,12,0,0" Name="canvas2" VerticalAlignment="Top" Width="312" />
+					<Canvas Height="100" HorizontalAlignment="Left" Margin="350,12,0,0" Name="canvas3" VerticalAlignment="Top" Width="100" MouseDown="canvas_MouseDown" />
+					<Canvas Height="100" HorizontalAlignment="Left" Margin="350,118,0,0" Name="canvas4" VerticalAlignment="Top" Width="100"  MouseDown="canvas_MouseDown"/>
+					<Canvas Height="100" HorizontalAlignment="Left" Margin="350,224,0,0" Name="canvas5" VerticalAlignment="Top" Width="100"  MouseDown="canvas_MouseDown"/>
+					<Label Content="Antal poäng" Height="28" HorizontalAlignment="Left" Margin="6,330,0,0" Name="label1" VerticalAlignment="Top" />
+					<Label Height="28" HorizontalAlignment="Left" Margin="87,330,0,0" Name="lblPoints" VerticalAlignment="Top" Content="0" />
+				</Grid>
+			</TabItem>
+			<TabItem Header="Administration" Name="tabItem2">
+				<Grid>
+					<ListBox Height="347" HorizontalAlignment="Left" Margin="190,5,0,0" Name="lbWords" VerticalAlignment="Top" Width="168" />
+					<Button Content="Lägg till bild" Height="23" HorizontalAlignment="Left" Margin="364,94,0,0" Name="btnChangePicture" VerticalAlignment="Top" Width="75" Click="button1_Click" />
+					<Button Content="Ändra ord" Height="23" HorizontalAlignment="Left" Margin="364,36,0,0" Name="btnChangeWord" VerticalAlignment="Top" Width="75" />
+					<Button Content="Ta bort ord" Height="23" HorizontalAlignment="Left" Margin="364,65,0,0" Name="btnRemoveWord" VerticalAlignment="Top" Width="75" Click="btnRemoveWord_Click" />
+					<Button Content="Ta bort grupp" Height="23" HorizontalAlignment="Left" Margin="78,65,0,0" Name="btnRemoveGroup" VerticalAlignment="Top" Width="105" Click="btnRemoveGroup_Click" />
+					<Button Content="Nytt ord" Height="23" HorizontalAlignment="Left" Margin="364,6,0,0" Name="btnNewWord" VerticalAlignment="Top" Width="75" />
+					<Button Content="Ny grupp" Height="23" HorizontalAlignment="Left" Margin="78,6,0,0" Name="btnNewGroup" VerticalAlignment="Top" Width="75" Click="btnNewGroup_Click" />
+					<ListBox Height="346" HorizontalAlignment="Left" Margin="6,6,0,0" Name="lbGroup" VerticalAlignment="Top" Width="66" PreviewMouseLeftButtonDown="lbGroup_PreviewMouseLeftButtonDown" IsHitTestVisible="True" />
+					<Button Content="Ändra grupp" Height="23" HorizontalAlignment="Left" Margin="78,36,0,0" Name="lblChangeGroup" VerticalAlignment="Top" Width="75" Click="lblChangeGroup_Click" />
+				</Grid>
+			</TabItem>
+		</TabControl>
+	</Grid>
+</Window>
